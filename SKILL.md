@@ -1,11 +1,11 @@
 ---
-name: ai-harness
-description: AI Harness — ClaudeCode + Codex 双 Agent 协作执行控制系统。初始化记忆库、项目状态机追踪、Handoff 接力、归档总结、工作流沉淀。触发词："初始化记忆库"/"新建项目"/"项目归档"/"Handoff"/"记忆库状态"。
+name: awesome-agent-memorybase
+description: Awesome Agent MemoryBase — ClaudeCode + Codex 共享记忆库，项目状态机追踪、Handoff 接力、归档总结、工作流沉淀。触发词："初始化记忆库"/"新建项目"/"项目归档"/"Handoff"/"记忆库状态"。
 argument-hint: [action] [project-name]
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob
 ---
 
-# AI Harness — 双 Agent 协作执行控制系统
+# Awesome Agent MemoryBase — 双 Agent 共享记忆库
 
 > 🎯 ClaudeCode 想 + Codex 做 = 项目从想法到归档的全生命周期管理。
 

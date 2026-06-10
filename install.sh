@@ -22,7 +22,7 @@ SUB_SKILLS=(
 )
 
 CLAUDE_SKILLS=("${SUB_SKILLS[@]}")
-CODEX_SKILLS=(ai-harness "${SUB_SKILLS[@]}")
+CODEX_SKILLS=(awesome-agent-memorybase "${SUB_SKILLS[@]}")
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 MODE="symlink"
@@ -55,7 +55,7 @@ done
 
 # Sanity check
 if [[ ! -f "$SCRIPT_DIR/SKILL.md" ]]; then
-  echo "Missing: SKILL.md — are you running from the ai-harness root?"
+  echo "Missing: SKILL.md — are you running from the awesome-agent-memorybase root?"
   exit 1
 fi
 for s in "${SUB_SKILLS[@]}"; do
@@ -67,7 +67,7 @@ done
 
 skill_source() {
   local skill="$1"
-  if [[ "$skill" == "ai-harness" ]]; then
+  if [[ "$skill" == "awesome-agent-memorybase" ]]; then
     echo "$SCRIPT_DIR"
   else
     echo "$SCRIPT_DIR/skills/$skill"

@@ -7,11 +7,11 @@
 ---
 
 <p align="center">
-  <img src="docs/banner.png" alt="AI Harness" width="720">
+  <img src="docs/banner.png" alt="Awesome Agent MemoryBase" width="720">
 </p>
 
 <p align="center">
-  <a href="https://github.com/ietigerjue/ai-harness/blob/master/CHANGELOG.md"><img src="https://img.shields.io/badge/version-v1.0.0-blue" alt="Version"></a>
+  <a href="https://github.com/ietigerjue/awesome-agent-memorybase/blob/master/CHANGELOG.md"><img src="https://img.shields.io/badge/version-v1.0.0-blue" alt="Version"></a>
   &nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
 </p>
@@ -29,7 +29,7 @@
 
 ### What It Is
 
-AI Harness is a **memory-based execution control system** that turns ClaudeCode (thinking) and Codex (building) into a traceable, recoverable, reusable engineering pipeline.
+Awesome Agent MemoryBase is a **memory-based execution control system** that turns ClaudeCode (thinking) and Codex (building) into a traceable, recoverable, reusable engineering pipeline.
 
 Drop a Memory Base folder next to your projects. Your agents automatically track state machines, log decisions, hand off cleanly between each other, archive completed work, and extract reusable patterns.
 
@@ -60,8 +60,8 @@ Idea → Spec → Task Plan → Execution → Test → Review → Archive → Wo
 #### 1. Install
 
 ```bash
-git clone https://github.com/ietigerjue/ai-harness.git
-cd ai-harness
+git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
+cd awesome-agent-memorybase
 bash install.sh --all   # Install for both ClaudeCode and Codex
 ```
 
@@ -144,7 +144,7 @@ MIT
 
 ### 这是什么
 
-AI Harness 是一套**基于记忆库的双 Agent 执行控制系统**，让 ClaudeCode（思考）和 Codex（执行）的协作变成可追溯、可回滚、可复用的工程管线。
+Awesome Agent MemoryBase 是一套**基于记忆库的双 Agent 执行控制系统**，让 ClaudeCode（思考）和 Codex（执行）的协作变成可追溯、可回滚、可复用的工程管线。
 
 在你的项目文件夹旁边放一个 Memory Base，Agent 自动追踪项目状态机、记录每次决策、在 Agent 之间无缝交接、完成后归档总结并沉淀工作流。
 
@@ -175,8 +175,8 @@ Idea → Spec → Task Plan → Execution → Test → Review → Archive → Wo
 #### 1. 安装
 
 ```bash
-git clone https://github.com/ietigerjue/ai-harness.git
-cd ai-harness
+git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
+cd awesome-agent-memorybase
 bash install.sh --all   # 同时安装到 ClaudeCode 和 Codex
 ```
 
