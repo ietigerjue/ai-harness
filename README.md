@@ -6,10 +6,8 @@
 
 ---
 
-<h1 align="center">AI Harness</h1>
-
 <p align="center">
-  <strong>ClaudeCode thinks. Codex builds. Harness tracks everything.</strong>
+  <img src="docs/banner.png" alt="AI Harness" width="720">
 </p>
 
 <p align="center">
