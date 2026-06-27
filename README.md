@@ -11,14 +11,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ietigerjue/awesome-agent-memorybase/blob/master/CHANGELOG.md"><img src="https://img.shields.io/badge/version-v1.0.0-blue" alt="Version"></a>
+  <a href="https://github.com/ietigerjue/awesome-agent-memorybase/blob/master/CHANGELOG.md"><img src="https://img.shields.io/badge/version-v2.0.0-blue" alt="Version"></a>
   &nbsp;
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
 </p>
 
 <p align="center">
   A memory-base execution control system for ClaudeCode + Codex dual-agent collaboration.<br>
-  From idea to archive — every decision logged, every handoff clean, every project traceable.
+  From idea to archive — every decision logged, every handoff clean, every project traceable.<br>
+  <strong>v2.0</strong>: Knowledge Base auto-classification · 5-section Handoff · Session-Log · Loop System · Darwin Ratchet.
 </p>
 
 ---
@@ -29,112 +30,111 @@
 
 ### What It Is
 
-Awesome Agent MemoryBase is a **memory-based execution control system** that turns ClaudeCode (thinking) and Codex (building) into a traceable, recoverable, reusable engineering pipeline.
-
-Drop a Memory Base folder next to your projects. Your agents automatically track state machines, log decisions, hand off cleanly between each other, archive completed work, and extract reusable patterns.
+Awesome Agent MemoryBase is a **memory-based execution control system** that turns ClaudeCode (thinking/executing) and Codex (reviewing/testing) into a traceable, recoverable, reusable engineering pipeline.
 
 ### What Problem It Solves
 
 | Without Harness | With Harness |
 |---|---|
-| Agent forgets where it left off | Project record tracks every state |
-| Codex runs out of quota → project stalls | Handoff protocol for seamless接力 |
-| Completed project knowledge evaporates | Archive summary + workflow extraction |
-| Unsure what the agent actually did | Execution log + rollback points |
-| Re-researching the same tech stack | Tech stack accumulation, record once |
+| Agent forgets where it left off | Session-log + project record track every state |
+| Handoff is chaotic, context lost | 5-section Handoff protocol with file whitelist + context kit + review dimensions |
+| Completed project knowledge evaporates | Archive summary + workflow extraction + knowledge base compilation |
+| Knowledge scattered across chats | Knowledge Base with domain-based auto-classification + global index |
+| No quality gate before shipping | Done Criteria checklist + Codex adversarial review before archive |
 
-### Core Concepts
-
-```
-Idea → Spec → Task Plan → Execution → Test → Review → Archive → Workflow Extraction
-  ↑                            ↑          ↑         ↑
-  ClaudeCode owns              Codex owns         ClaudeCode reviews
-```
-
-- **One project = one file**: Both agents write to the same record — who did what is always clear
-- **Three iron rules**: Never fabricate. Never overwrite without backup. Mark uncertainty as "unconfirmed."
-- **Done Criteria gate**: 10-point checklist before any project gets archived — "planned" ≠ "done"
-
-### Quick Start
-
-#### 1. Install
-
-```bash
-git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
-cd awesome-agent-memorybase
-bash install.sh --all   # Install for both ClaudeCode and Codex
-```
-
-#### 2. Initialize Your Memory Base
-
-Open ClaudeCode or Codex in any directory and say:
-
-```
-初始化记忆库
-```
-
-The agent will ask:
-- Where to place the Memory Base?
-- What domains do you work in? (e.g., trading, side projects, academics)
-- Agent usage pattern? (dual-agent / single-agent)
-
-It then creates the full directory structure and seed files automatically.
-
-#### 3. Create a New Project
-
-```
-新建项目 MyWebApp
-```
-
-#### 4. Daily Workflow
-
-- **ClaudeCode**: Brainstorm → Design → Task breakdown → Generate Codex instructions
-- **Codex**: Execute tasks → Update project records → Test → Fix
-- **Handoff**: Auto-handoff when quota runs out or context gets too long
-
-#### 5. Archive
-
-```
-归档项目 MyWebApp
-```
-
-Agent auto-generates: history summary → Mermaid flowchart → workflow patterns → tech stack entry → index updates
-
-### Skill Architecture
-
-| Sub-skill | Trigger | What It Does |
-|---|---|---|
-| `harness-init` | "初始化记忆库" | Creates Memory Base, asks domains & agent mode |
-| `harness-new-project` | "新建项目 X" | Creates project record from template |
-| `harness-archive` | "归档项目 X" | Summary + flowchart + workflow extraction |
-| `harness-handoff` | "Handoff X" | Agent handoff protocol |
-| `harness-status` | "记忆库状态" | Global dashboard of all projects |
-
-### Built-in Templates (7)
-
-Project Record · Agent Handoff · Done Criteria · NEXT_ACTIONS · Failure Recovery · Project Archive · ML Project
-
-### Built-in Rules (3)
-
-Project State Machine · Permission & Security · Context Hygiene
-
-### Directory Structure
+### Architecture (v2.0)
 
 ```
 Memory Base/
-├── 00_总索引/          ← Rules & master indexes
-├── 01_项目记录/        ← One file per project
-├── 02_工作流沉淀/      ← Reusable patterns
-├── 03_Skill产物/       ← Skill outputs
-├── 04_归档项目/        ← Completed projects
-├── 05_可回溯记录/      ← Logs / decisions / changes
-├── 07_模板库/          ← Standardized templates
-└── 99_迁移记录/        ← Migration history
+├── 00_总索引/          Rules, Skill Index, Agent roles
+├── 01_项目记录/        Projects (webapp/app/skills/media/other)
+├── 02_工作流沉淀/      Reusable workflows by domain
+├── 03_Skill产物/       Skill outputs
+├── 04_归档项目/        Completed projects with summaries
+├── 06_评估与优化/      Agent quality evaluation
+├── 07_模板库/          Standardized templates
+├── 08_知识库/          Knowledge Base with auto-classification
+└── memory/             Session-logs, preferences, rules
 ```
 
-### License
+### Agent Division (v2.0)
 
-MIT
+| ClaudeCode | Codex |
+|---|---|
+| Brainstorm, design, plan | Code review, find bugs, fix bugs |
+| Write code, modify files, debug | Independent testing, security audit |
+| Project archive, workflow extraction | Done Criteria verification |
+| Knowledge base ingestion & maintenance | File migration verification |
+| Generate Codex review instructions | Adversarial review of ClaudeCode output |
+
+**Core principle**: ClaudeCode owns "what to think, how to do." Codex owns "is it done right, are there bugs." Maker and checker must be separate.
+
+### Codex Handoff Protocol (5-Section Mandatory)
+
+| # | Section | Content |
+|---|---|---|
+| 1 | File Whitelist | `git diff --name-only`. Codex MUST NOT explore beyond. |
+| 2 | Context Kit | Change summary + callgraph + test status + known risks |
+| 3 | Review Dimensions | correctness / security / race / business logic ONLY |
+| 4 | Sub-agent Cap | Default = 3. Exceeding needs justification. |
+| 5 | Output Format | Brief + detailed analysis to project record |
+
+### Simple Task Bypass
+
+Skip Codex review when: 1 file + 50 lines + no new imports. OR pure docs/config. EXCEPT: auth/encryption/DB/payment/eval/exec/secrets/CI.
+
+### Knowledge Base System (v2.0)
+
+Domain-based auto-classification:
+
+```
+08_知识库/
+├── SCHEMA.md           LLM operation protocol
+├── index.md            Global index by domain
+├── log.md              Append-only operation log
+├── 01_技术/            Tech: AI/LLM, languages, tools
+├── 02_科研/            Research by field
+├── 03_创意方法论/       Creative methods
+├── 04_工作方法/        Work methods
+├── 05_产品与商业/      Product ideas, business
+└── 06_技术参考/        Architecture specs, references
+```
+
+**Ingest workflow** (two-step CoT): Analyze (domain, entities, concepts, claims) → Generate (pages, index, log). Auto-classification via decision tree in `SCHEMA.md`. Quality: plain language + analogies + exhaustive extraction + contradiction marking.
+
+### Session-Log System
+
+Every code change logged to `memory/session-log-YYYY-MM-DD.md`. ClaudeCode block (what changed) + Codex block (review findings). Facts only.
+
+### Loop System + Darwin Ratchet
+
+Recurring autonomous tasks via `/loop`. Audit loop: 6 health signals. Every harness file follows Darwin Ratchet: each modification must improve or stay equal, never degrade.
+
+### Project Record Categories
+
+```
+01_项目记录/
+├── webapp/    Web applications
+├── app/       Desktop/mobile apps
+├── skills/    Skill development
+├── 自媒体/    Social media
+└── 其他/     Other
+```
+
+### Quick Start
+
+```bash
+git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
+cd awesome-agent-memorybase && bash install.sh --all
+```
+
+```
+初始化记忆库
+新建项目 MyProject
+帮我把这篇内容添加入知识库
+```
+
+### License · MIT
 
 ---
 
@@ -144,109 +144,108 @@ MIT
 
 ### 这是什么
 
-Awesome Agent MemoryBase 是一套**基于记忆库的双 Agent 执行控制系统**，让 ClaudeCode（思考）和 Codex（执行）的协作变成可追溯、可回滚、可复用的工程管线。
-
-在你的项目文件夹旁边放一个 Memory Base，Agent 自动追踪项目状态机、记录每次决策、在 Agent 之间无缝交接、完成后归档总结并沉淀工作流。
+Awesome Agent MemoryBase 是一套**基于记忆库的双 Agent 执行控制系统**，让 ClaudeCode（思考+执行）和 Codex（审查+测试）的协作变成可追溯、可回滚、可复用的工程管线。
 
 ### 解决了什么问题
 
 | 没有 Harness | 有了 Harness |
 |---|---|
-| Agent 忘记上次做到哪了 | 项目记录文件追踪每个状态 |
-| Codex 额度用完项目停工 | Handoff 协议无缝接力 |
-| 完成的项目经验丢失 | 归档总结 + 工作流沉淀 |
-| 不确定 Agent 做了什么 | 执行日志 + 回滚点 |
-| 技术栈重复调研 | 技术栈积累，一次记录永久复用 |
+| Agent 忘记上次做到哪了 | Session-log + 项目记录追踪每个状态 |
+| Handoff 混乱，上下文丢失 | 五段 Handoff 协议：白名单 + Context Kit + 审查维度 + Sub-agent 上限 + 输出格式 |
+| 完成的项目经验丢失 | 归档总结 + 工作流沉淀 + 知识库编译 |
+| 知识散落在各次聊天中 | 知识库按域自动归类 + 全局索引 |
+| 发布前无质量关卡 | Done Criteria 检查 + Codex 对抗审查 |
 
-### 核心概念
-
-```
-Idea → Spec → Task Plan → Execution → Test → Review → Archive → Workflow Extraction
-  ↑                            ↑          ↑         ↑
-  ClaudeCode 负责              Codex 负责         ClaudeCode 审查
-```
-
-- **一个项目一个文件**：双 Agent 的记录写在一起，谁做了什么都清楚
-- **三条铁律**：不捏造、不覆盖不删除、不确定就标记"未确认"
-- **Done Criteria 检查**：项目完成前逐一检查 10 项标准，不把"计划完成"当作"项目完成"
-
-### 快速开始
-
-#### 1. 安装
-
-```bash
-git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
-cd awesome-agent-memorybase
-bash install.sh --all   # 同时安装到 ClaudeCode 和 Codex
-```
-
-#### 2. 初始化记忆库
-
-打开 ClaudeCode 或 Codex，在你想放记忆库的目录说：
-
-```
-初始化记忆库
-```
-
-Agent 会问你：
-- 记忆库放哪里？
-- 你的工作领域？（如：交易、副业、学校）
-- Agent 使用习惯？（双 Agent / 单 Agent）
-
-然后自动创建完整的目录结构和种子文件。
-
-#### 3. 新建项目
-
-```
-新建项目 我的WebApp
-```
-
-#### 4. 日常工作流
-
-- **ClaudeCode**：脑暴 → 方案设计 → 任务拆解 → 生成 Codex 执行指令
-- **Codex**：按 TASK 执行 → 更新项目记录 → 测试 → 修复
-- **Handoff**：额度用完/上下文不足时自动交接
-
-#### 5. 归档
-
-```
-归档项目 我的WebApp
-```
-
-Agent 自动：总结历史 → 生成 Mermaid 流程图 → 沉淀工作流 → 记录技术栈 → 更新全部索引
-
-### Skill 架构
-
-| 子技能 | 触发词 | 功能 |
-|---|---|---|
-| `harness-init` | "初始化记忆库" | 创建记忆库，询问领域和 Agent 模式 |
-| `harness-new-project` | "新建项目 X" | 从模板创建项目记录 |
-| `harness-archive` | "归档项目 X" | 总结 + 流程图 + 工作流沉淀 |
-| `harness-handoff` | "Handoff X" | Agent 交接协议 |
-| `harness-status` | "记忆库状态" | 全部项目状态看板 |
-
-### 内置模板（7 个）
-
-项目记录 · Agent Handoff · Done Criteria · NEXT_ACTIONS · 失败恢复 · 项目归档 · 机器学习项目
-
-### 内置规则（3 个）
-
-项目状态机 · 权限与安全 · Context Hygiene
-
-### 目录结构
+### 架构 (v2.0)
 
 ```
 Memory Base/
-├── 00_总索引/          ← 规则和索引入口
-├── 01_项目记录/        ← 每个项目一个文件
-├── 02_工作流沉淀/      ← 可复用工作流模式
-├── 03_Skill产物/       ← Skill 输出文件
-├── 04_归档项目/        ← 已完成项目总结
-├── 05_可回溯记录/      ← 日志/决策/变更
-├── 07_模板库/          ← 标准化模板
-└── 99_迁移记录/        ← 迁移历史
+├── 00_总索引/          规则、Skill 索引、Agent 分工
+├── 01_项目记录/        项目 (webapp/app/skills/自媒体/其他)
+├── 02_工作流沉淀/      按领域沉淀可复用工作流
+├── 03_Skill产物/       Skill 输出文件
+├── 04_归档项目/        已完成项目含总结
+├── 06_评估与优化/      Agent 执行质量评估
+├── 07_模板库/          标准化模板
+├── 08_知识库/          知识库（自动归类 + 全局索引）
+└── memory/             Session-log、偏好、规则
 ```
 
-### License
+### Agent 分工 (v2.0)
 
-MIT
+| ClaudeCode | Codex |
+|---|---|
+| 脑暴 / 方案 / 计划 | 代码审查 / 找 bug / 修 bug |
+| 写代码 / 改文件 / 调试 | 独立测试 / 安全审计 |
+| 项目归档 / 工作流沉淀 | Done Criteria 校验 |
+| 知识库摄取与维护 | 文件迁移完整性验证 |
+| 生成 Codex 审查指令 | 对抗性审查 ClaudeCode 产出 |
+
+**核心原则**: ClaudeCode 管"想什么、怎么做"，Codex 管"做得对不对、有没有 bug"。Maker 和 Checker 必须分离。
+
+### Codex Handoff 协议（五段强制）
+
+| # | 段 | 内容 |
+|---|---|---|
+| 1 | 可读文件白名单 | `git diff --name-only`。禁止 Codex grep/find/ls 越界探索。 |
+| 2 | Context Kit | 改动摘要 + callgraph + 测试状态 + 已知风险 |
+| 3 | 审查维度 | 只看 correctness / security / race / 业务逻辑。不看风格。 |
+| 4 | Sub-agent 上限 | 默认 = 3。超过必须写理由。 |
+| 5 | 输出格式 | 简报 + 详细分析到项目记录 |
+
+### 简单任务跳过 Codex
+
+满足任一即可跳过：1 文件且 50 行且无新 import / 纯文档 / 纯配置。但鉴权/加密/DB migration/支付/CI 永远不能跳过。
+
+### 知识库系统 (v2.0)
+
+按**知识域**自动归类：
+
+```
+08_知识库/
+├── SCHEMA.md           LLM 操作协议
+├── index.md            按知识域分组全局索引
+├── log.md              追加式操作日志
+├── 01_技术/            AI/LLM、编程语言、工具框架
+├── 02_科研/            按学科领域
+├── 03_创意方法论/       创意方法
+├── 04_工作方法/         内容创作、效率方法
+├── 05_产品与商业/       产品想法、商业分析
+└── 06_技术参考/         架构规格、参考实现
+```
+
+**摄取工作流**（两步思维链）: 分析（提取域/实体/概念/主张）→ 生成（写页面/更新索引/记录日志）。`SCHEMA.md` 含自动归类决策树。质量规则: 白话+类比（易懂），穷尽提取+保留出处+矛盾标注（不丢失关键知识点）。
+
+### Session-Log 系统
+
+每次改动立即记入 `memory/session-log-YYYY-MM-DD.md`。ClaudeCode 块 + Codex 块。只记事实。
+
+### Loop 系统 + Darwin Ratchet
+
+`/loop` 定时自主任务。Audit loop: 6 项健康信号。每个文件遵循 Darwin Ratchet: 每次修改必须更好或等价，禁止劣化。
+
+### 项目记录分类
+
+```
+01_项目记录/
+├── webapp/    网页应用
+├── app/       桌面/移动应用
+├── skills/    Skill 开发
+├── 自媒体/    自媒体运营
+└── 其他/     其他项目
+```
+
+### 快速开始
+
+```bash
+git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
+cd awesome-agent-memorybase && bash install.sh --all
+```
+
+```
+初始化记忆库
+新建项目 MyProject
+帮我把这篇内容添加入知识库
+```
+
+### License · MIT

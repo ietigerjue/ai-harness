@@ -1,91 +1,136 @@
 ---
 name: awesome-agent-memorybase
-description: Awesome Agent MemoryBase — ClaudeCode + Codex 共享记忆库，项目状态机追踪、Handoff 接力、归档总结、工作流沉淀。触发词："初始化记忆库"/"新建项目"/"项目归档"/"Handoff"/"记忆库状态"。
+description: Awesome Agent MemoryBase — ClaudeCode + Codex dual-agent memory bank. Project state machine tracking, 5-section Handoff protocol, archive & workflow extraction, knowledge base with auto-classification, session-log system. Triggers: "初始化记忆库"/"新建项目"/"归档项目"/"Handoff"/"记忆库状态"/"添加入知识库".
 argument-hint: [action] [project-name]
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob
 ---
 
-# Awesome Agent MemoryBase — 双 Agent 共享记忆库
+# Awesome Agent MemoryBase — Dual-Agent Memory Bank
 
-> 🎯 ClaudeCode 想 + Codex 做 = 项目从想法到归档的全生命周期管理。
+> ClaudeCode thinks + executes. Codex reviews + tests. From idea to archive, every step traceable.
 
-把 ClaudeCode 和 Codex 的协作变成一套可追溯、可回滚、可复用的工程系统：
-
-**状态机追踪 → 项目记录 → Handoff 接力 → Done Criteria 检查 → 归档总结 → 工作流沉淀**
-
-本文件是**总协议 + 路由器**。具体子流程在 `skills/harness-*/SKILL.md`。
-
-## Codex 兼容
-
-Codex 没有 Claude Code 的 slash-command harness。安装到 Codex 后，按自然语言触发：
-
-- `初始化记忆库` / `初始化 ai-harness` → 读取并执行 `skills/harness-init/SKILL.md`
-- `新建项目 项目名` → `skills/harness-new-project/SKILL.md`
-- `归档项目 项目名` → `skills/harness-archive/SKILL.md`
-- `Handoff 项目名` → `skills/harness-handoff/SKILL.md`
-- `记忆库状态` → `skills/harness-status/SKILL.md`
-- `更新技术栈 技术名` → `rules/技术栈积累.md` 追加规则
+This file is the **master protocol + router**. Sub-protocols live in `skills/harness-*/SKILL.md`.
 
 ---
 
-## 核心概念
-
-### 两个 Agent 的分工
+## Agent Division (v2.0)
 
 | ClaudeCode | Codex |
 |---|---|
-| 脑暴、需求分析 | 写代码、创建文件 |
-| 产品/技术方案设计 | 调试、运行测试 |
-| 任务拆解与计划 | 项目归档整理 |
-| 生成 Codex 执行指令 | 自动化脚本 |
-| 规则/模板/结构设计 | 从模板创建文件 |
+| Brainstorm, design, plan | Code review, find bugs, fix bugs |
+| Write code, modify files, debug | Independent testing, security audit |
+| Project archive, workflow extraction | Done Criteria verification |
+| Knowledge base ingestion & maintenance | File migration verification |
+| Generate Codex review instructions | Adversarial review |
 
-### 项目状态机
-
-```
-Idea → Spec → Task Plan → Execution → Test → Review → Archive → Workflow Extraction
-```
-
-禁止跳级。Codex 主要在 Execution/Test/Archive 阶段工作，ClaudeCode 在前面和最后。
-
-### 一个项目一个文件
-
-同一项目只维护一个项目记录文件，ClaudeCode 和 Codex 的记录都写在一起，每条标明谁做的。
+**Core principle**: Maker and checker must be separate. ClaudeCode owns "what & how." Codex owns "is it right."
 
 ---
 
-## 路由表
+## Routing Table
 
-| 用户说 | 调用 | 前置条件 |
+| User Says | Invokes | Pre-condition |
 |---|---|---|
-| "初始化记忆库" / "init harness" / "setup memory base" | `harness-init` | 无（这是入口） |
-| "新建项目" / "new project" / "创建项目记录" | `harness-new-project` | 已 init |
-| "项目归档" / "archive" / "结束" / "总结" | `harness-archive` | 项目在 Review 状态 |
-| "Handoff" / "交接" / "接力" | `harness-handoff` | 项目在进行中 |
-| "记忆库状态" / "status" / "看板" | `harness-status` | 任意时刻 |
-| "更新技术栈" / "记录技术栈" | 追加 `rules/技术栈积累.md` | 项目用了新技术 |
+| "初始化记忆库" / "init harness" | `harness-init` | None (entry point) |
+| "新建项目 X" / "new project X" | `harness-new-project` | Already init'd |
+| "归档项目 X" / "archive X" | `harness-archive` | Project in Review state |
+| "Handoff X" / "交接 X" | `harness-handoff` | Project in progress |
+| "记忆库状态" / "status" / "看板" | `harness-status` | Any time |
+| "添加入知识库" / "加入知识库" | Read `08_知识库/SCHEMA.md` + ingest workflow | Memory Base exists |
+| "知识库健康检查" / "knowledge base lint" | Lint rules in `08_知识库/SCHEMA.md` | Knowledge base exists |
 
-### 首次使用 — 强制入口
+### Codex Compatibility
 
-如果用户不在已初始化的记忆库目录中，说"新建项目"前必须先跑 `harness-init`。检查方式：当前目录是否有 `00_总索引/`。
-
----
-
-## 三条铁律
-
-1. **真实性**：禁止捏造已完成任务、测试结果、文件路径。不确定的写"未能确认"。
-2. **不覆盖不删除**：工作流和技术栈只追加。删除文件必须用户确认。
-3. **不确定就标记**："未确认"比编造强。
+Natural language triggers for Codex:
+- `初始化记忆库` → `skills/harness-init/SKILL.md`
+- `新建项目 X` → `skills/harness-new-project/SKILL.md`
+- `归档项目 X` → `skills/harness-archive/SKILL.md`
+- `Handoff X` → `skills/harness-handoff/SKILL.md`
+- `记忆库状态` → `skills/harness-status/SKILL.md`
 
 ---
 
-## 安装
+## Core Protocols
+
+### Codex Handoff (5-Section Mandatory)
+
+| # | Section | Content |
+|---|---|---|
+| 1 | File Whitelist | `git diff --name-only`. Codex MUST NOT explore beyond. |
+| 2 | Context Kit | Change summary + callgraph + test status + known risks |
+| 3 | Review Dimensions | correctness / security / race / business logic ONLY. Not style/lint/format. |
+| 4 | Sub-agent Cap | Default = 3. Exceeding needs written justification. |
+| 5 | Output Format | Brief <300 words + detailed analysis to project record |
+
+### Simple Task Bypass
+
+Skip Codex review when ALL of: 1 file + 50 lines + no new imports/dependencies. OR pure docs (.md/.txt no code). OR pure config (passed schema/lint).
+
+ALWAYS needs Codex: auth / authorization / encryption / DB migration / payment / billing / eval / exec / subprocess / .env / secrets / CI workflow.
+
+### Session-Log
+
+After every code change, immediately append to `memory/session-log-YYYY-MM-DD.md`:
+- `## ClaudeCode:` block — what changed, what files, verification results
+- `## Codex:` block — review findings, test results
+- Facts only. What changed, what passed, what's next. Why goes to project records.
+
+### Knowledge Base Ingest
+
+When user says "添加入知识库":
+1. Read `08_知识库/SCHEMA.md` for the operation protocol
+2. Two-step CoT: Analyze (domain, entities, concepts, claims, relationships) → Generate (pages, update index.md, append log.md)
+3. Auto-classify into correct domain via decision tree
+4. Quality: plain language + analogies (easy to understand). Exhaustive extraction + source preservation + contradiction marking (no key knowledge loss).
+
+### Darwin Ratchet
+
+Every harness-rules file ends with a Ratchet footer. Each modification must be better than or equal to the previous version. Degradation is forbidden.
+
+---
+
+## Three Iron Rules
+
+1. **Authenticity**: Never fabricate completed tasks, test results, or file paths. Mark uncertain as "unconfirmed."
+2. **No overwrite without backup**: Workflows and tech stacks are append-only. Deletion requires user confirmation.
+3. **Mark uncertainty**: "Unconfirmed" is better than fabrication.
+
+---
+
+## Project State Machine
+
+```
+Idea -> Spec -> Task Plan -> Execution -> Test -> Review -> Archive -> Workflow Extraction
+```
+
+No skipping states. Codex primarily in Execution/Test/Review/Archive. ClaudeCode owns front and end.
+
+---
+
+## Directory Structure
+
+```
+Memory Base/
+├── 00_总索引/          Rules, Skill Index, Agent roles
+├── 01_项目记录/        Projects by category (webapp/app/skills/media/other)
+├── 02_工作流沉淀/      Reusable workflows by domain
+├── 03_Skill产物/       Skill outputs
+├── 04_归档项目/        Completed projects with summaries
+├── 06_评估与优化/      Agent quality evaluation
+├── 07_模板库/          Standardized templates
+├── 08_知识库/          Knowledge base with auto-classification
+└── memory/             Session-logs, preferences, rules
+```
+
+---
+
+## Installation
 
 ```bash
-git clone <your-repo-url> ai-harness
-cd ai-harness
+git clone https://github.com/ietigerjue/awesome-agent-memorybase.git
+cd awesome-agent-memorybase
 bash install.sh          # Claude Code only
 bash install.sh --all    # Claude Code + Codex
 ```
 
-安装后在任意目录打开 ClaudeCode/Codex，说"初始化记忆库"开始。
+After install, open ClaudeCode/Codex in any directory and say "初始化记忆库" to begin.
